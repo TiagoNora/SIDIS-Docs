@@ -1,0 +1,28 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+
+autoactivate on
+autonumber
+
+actor "Client" as client
+participant "ProductsController" as controller
+participant "productService:ProductsService" as service
+participant "productRepo:ProductsRepository" as repository
+participant "ProductInstance" as instance
+
+activate client
+
+client -> controller: GET /products/search/{skuOrName}
+controller -> service : productService.findByNameOrSuk(skuOrName)
+service -> repository: productRepo.findByNameOrSuk(skuOrName)
+loop for each 'instance' in instances
+ repository -> instance : GET /products/search/{skuOrName}
+ instance --> repository: listOfProductDetails
+end loop
+repository --> service: listOfProductDetails & 200
+service --> controller: listOfProductDetails & 200
+controller --> client: listOfProductDetails & 200
+
+
+@enduml
