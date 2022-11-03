@@ -9,7 +9,6 @@ actor "Client" as client
 participant "ProductsController" as controller
 participant "productService:ProductsService" as service
 participant "productRepo:ProductsRepository" as repository
-participant "ProductsInstances" as instances
 participant "ProductInstance" as instance
 
 activate client
@@ -17,12 +16,10 @@ activate client
 client -> controller : GET /products
 controller -> service : productService.findAllProductsFromCatalog(pageNo,pageSize)
 service -> repository: productRepo.findAllProductsFromCatalog(pageNo,pageSize)
-repository -> instances: getAllProductsCatalogFromInstances(pageNo,pageSize)
 loop for each 'instance' in instances
- instances -> instance : getProductsCatalog(pageNo,pageSize)
- instance --> instances: listOfProductCatalog
+ repository -> instance : GET /products
+ instance --> repository: listOfProductCatalog
 end loop
-instances --> repository: listOfProducts
 repository --> service: listOfProductCatalog & 200
 service --> controller: listOfProductCatalog & 200
 controller --> client: listOfProductCatalog & 200
