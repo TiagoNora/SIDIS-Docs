@@ -1,0 +1,31 @@
+@startuml
+
+[App]
+[Products]
+[Review]
+[Votes]
+[Authentication]
+[Products_n]
+[Review_n]
+[Votes_n]
+[Authentication_n]
+
+ App --(0 Products
+ App --(0 Review
+ App --(0 Votes
+ App --(0 Authentication
+
+ Products --(0 Products_n
+ Review --(0 Review_n
+ Votes --(0 Votes_n
+ Authentication --(0 Authentication_n
+
+ Products --(0 Authentication
+
+ Review --(0 Authentication
+ Review --(0 Products
+ Review --(0)-- Votes
+
+ Votes --(0 Authentication
+
+@enduml
