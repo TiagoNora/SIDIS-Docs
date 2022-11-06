@@ -1,7 +1,7 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
-
+title Obtain the details of a product
 autoactivate on
 autonumber
 
@@ -9,7 +9,9 @@ actor "Client" as client
 participant "ProductsController" as controller
 participant "productService:ProductsService" as service
 participant "productRepo:ProductsRepository" as repository
-participant "productDetails:ProductDetails" as details
+participant "requestService:RequestService" as request
+participant ":ProductInstance" as instance
+participant ":ProductDetails" as details
 participant "product:Product" as product
 
 activate client
@@ -17,7 +19,15 @@ activate client
 client -> controller: GET /products/{sku}
 controller -> service : productService.findBySku(sku)
 service -> repository: productRepo.findBySuk(sku)
+alt success case
 repository --> service: product
+else product == null
+service -> request:retrieveProductFromApi(sku)
+request -> instance: GET /products/{sku}
+instance --> request: product & 200
+request --> service: product
+end
+
 service -> product: getSku()
 product --> service: sku
 service -> product: getName()
@@ -26,13 +36,10 @@ service -> product: getDescription()
 product --> service: description
 service -> product: getImages()
 product --> service: images
-service -> details**: new()
-service -> details: setSku(sku)
-service -> details: setName(name)
-service -> details: setDescription(description)
-service -> details: setImages(images)
-service --> controller: productDetails
-controller --> client: productDetails
+service -> details**: new(sku,name,description,images)
+details --> service: productDetails
+service --> controller: productDetails & 200
+controller --> client: productDetails & 200
 
 
 @enduml

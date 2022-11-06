@@ -1,7 +1,7 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
-
+title Obtain the catalog of products
 autoactivate on
 autonumber
 
@@ -9,7 +9,7 @@ actor "Client" as client
 participant "ProductsController" as controller
 participant "productService:ProductsService" as service
 participant "productRepo:ProductsRepository" as repository
-participant "productCatalog:ProductCatalog" as details
+participant ":ProductCatalog" as details
 participant "product:Product" as product
 
 activate client
@@ -24,13 +24,12 @@ loop for each 'product' in 'list'
     product --> repository: sku
     repository -> product: getName()
     product --> repository: name
-    repository -> details**: new()
-    repository -> details:productCatalog.setSku(sku)
-    repository -> details:productCatalog.setName(name)
-    details --> repository: listOfProductCatalog.add(productCatalog)
+    repository -> details**: new(sku,name)
+    details --> repository: productCatalog
+    repository --> repository: listOfProductCatalog.add(productCatalog)
 end loop
 repository --> service: listOfProductCatalog
 service --> controller: listOfProductCatalog
-controller --> client: listOfProductCatalog
+controller --> client: listOfProductCatalog & 200
 
 @enduml
