@@ -10,6 +10,7 @@ participant "reviewService:ReviewService" as Svc
 participant "productRepo:ProductRepository" as repository
 participant "requestService:RequestService" as request
 participant ":ProductInstance" as instance
+participant ":AuthInstance" as instanceAuth
 participant "review:Review" as review
 participant "reviewRepo:ReviewRepository" as Repo
 
@@ -29,8 +30,8 @@ request --> Svc: product
 end
 Svc -> Svc: jwt = parseJwt(request)
 Svc -> request: makeRequestToAuthentication(jwt)
-request -> instance: GET /auth/search/{jwt}
-instance --> request: user
+request -> instanceAuth: GET /auth/search/{jwt}
+instanceAuth --> request: user
 request --> Svc: user
 Svc -> review** : create(reviewDTO,sku,user.getUserId)
 review --> Svc :  review
