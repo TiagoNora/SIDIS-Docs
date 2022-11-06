@@ -9,20 +9,26 @@ actor "Client" as client
 participant "ModeratorController" as controller
 participant "reviewService:ReviewService" as service
 participant "reviewRepository:ReviewRepository" as repository
+participant "requestService:RequestService" as request
+participant ":AuthInstance" as instanceAuth
 
 activate client
 
 client -> controller: PUT /moderator/review/{idReview}
 controller -> service : reviewService.changeStatus(idReview,resource)
-service -> repository: reviewRepository.findByIdReview(idReview);
-repository --> service: review
-alt resource.getApproved() == true
-service --> service: review.setStatus("APPROVED")
-else resource.getApproved() == true
-service --> service: review.setStatus("REJECTED")
+
+service -> request : parseJwt(request)
+request --> service: jwt
+service -> request: makeRequestToAuthentication(jwt)
+request -> instanceAuth: GET /auth/search/{jwt}
+instanceAuth --> request: user
+request --> service: user
+alt user.getRoles = "MODERATOR"
+    service -> repository: reviewRepository.updateReview(resource,idReview)
+    repository --> service: ok
 end
-service -> repository: save(review)
-repository -> service: review
+
+
 service -> controller: review
 controller -> client: review
 
