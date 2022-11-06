@@ -1,7 +1,7 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
-
+title Search the catalog of products by product name or bar code
 autoactivate on
 autonumber
 
@@ -19,15 +19,7 @@ controller -> service : productService.findByNameOrSuk(skuOrName)
 service -> repository: productRepo.findByNameOrSuk(skuOrName)
 
 loop for each 'product' in 'list'
-    repository -> product: getSku()
-    product --> repository: sku
-    repository -> product: getName()
-    product --> repository: name
-    repository -> product: getDescription()
-    product --> repository: description
-    repository -> product: getImages()
-    product --> repository: images
-    repository -> details**: new(sku,name,description,images)
+    repository -> details**: new(product)
     details --> repository: productDetails
     repository --> repository: listOfProductDetails.add(productDetails)
 end loop

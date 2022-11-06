@@ -8,22 +8,26 @@ actor "ACME" as User
 participant "ReviewController" as Ctrl
 participant "reviewService:ReviewService" as Svc
 participant "productRepo:ProductRepository" as repository
-participant "reviewDTO:ReviewDTO" as reviewDTO
+participant "requestService:RequestService" as request
+participant ":ProductInstance" as instance
 participant "review:Review" as review
 participant "reviewRepo:ReviewRepository" as Repo
 
 activate User
 
-User -> Ctrl : POST/reviews{SKU}
+User -> Ctrl : POST/reviews{sku}
 
-Ctrl -> Svc : create(ReviewDTO, sku)
+Ctrl -> Svc : create(reviewDTO, sku)
 Svc -> repository : productRepo.findBySkuProduct(sku);
+alt success case
 repository --> Svc : product
-Svc -> reviewDTO : getText()
-reviewDTO --> Svc : text
-Svc -> reviewDTO : getRating()
-reviewDTO --> Svc : rating
-Svc -> review** : create(text,rating)
+else product == null
+Svc -> request:retrieveProductFromApi(sku)
+request -> instance: GET /products/{sku}
+instance --> request: product & 200
+request --> Svc: product
+end
+Svc -> review** : create(reviewDTO)
 review --> Svc :  review
 Svc -> Repo : reviewRepo.save(review)
 Repo --> Svc : ok

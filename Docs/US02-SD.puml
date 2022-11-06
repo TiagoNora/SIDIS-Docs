@@ -12,7 +12,6 @@ participant "productRepo:ProductsRepository" as repository
 participant "requestService:RequestService" as request
 participant ":ProductInstance" as instance
 participant ":ProductDetails" as details
-participant "product:Product" as product
 
 activate client
 
@@ -28,15 +27,7 @@ instance --> request: product & 200
 request --> service: product
 end
 
-service -> product: getSku()
-product --> service: sku
-service -> product: getName()
-product --> service: name
-service -> product: getDescription()
-product --> service: description
-service -> product: getImages()
-product --> service: images
-service -> details**: new(sku,name,description,images)
+service -> details**: new(product)
 details --> service: productDetails
 service --> controller: productDetails & 200
 controller --> client: productDetails & 200
