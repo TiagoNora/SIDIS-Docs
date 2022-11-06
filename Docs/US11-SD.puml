@@ -9,41 +9,29 @@ actor "Client" as Client
 participant "ReviewController" as Ctrl
 participant "reviewService:ReviewService" as service
 participant "reviewRepository:ReviewRepository" as Repo
-participant "review:Review" as review
-participant "reviewUser:ReviewUser" as reviewUser
+participant ":ReviewDTO" as reviewDTO
+participant "requestService:RequestService" as request
+participant ":AuthInstance" as instanceAuth
 
 activate Client
 
 Client -> Ctrl : GET /reviews/user/{idUser}
-Ctrl -> service : reviewService.findAllReviewsByUser(idUser)
-service -> Repo: reviewRepository.findAllReviewsByUser(idUser);
+Ctrl -> service : reviewService.findAllReviewsByUser(idUser,request)
+service -> request : parseJwt(request)
+request --> service: jwt
+service -> request: makeRequestToAuthentication(jwt)
+request -> instanceAuth: GET /auth/search/{jwt}
+instanceAuth --> request: user
+request --> service: user
+service -> Repo: reviewRepository.findAllReviewsByUser(user.getId())
 Repo --> service: reviews
 loop for each "review" in reviews
-    service -> review: getId()
-    review --> service: id
-    service -> review: getSku()
-    review --> service: sku
-    service -> review: getStatus()
-    review --> service: status
-    service -> review: getText()
-    review --> service: text
-    service -> review: getRating()
-    review --> service: rating
-    service -> review: getTotalVotes()
-    review --> service: totalVotes
-    service -> review: getUpVotes()
-    review --> service: upVotes
-    service -> review: getDownVotes()
-    review --> service: downVotes
-    service -> review: getCreationDateTime()
-    review --> service: creationDateTime
-    service -> review: getFunFact()
-    review --> service: funFact
-    service -> reviewUser**: new ReviewUser(id,sku,status,text,rating,totalVotes,upVotes,downVotes,creationDateTime,funFact)
-    reviewUser --> service: reviewUser
-    service -> service: reviewsUser.add(reviewUser);
+
+    service -> reviewDTO**: new ReviewDTO(review))
+    reviewDTO --> service: reviewDTO
+    service -> service: reviewsUser.add(reviewDTO);
 end loop
-service --> Ctrl: reviewsUser
+service --> Ctrl: reviewsDTO
 Ctrl --> Client: list of reviews
 
 @enduml
