@@ -35,6 +35,10 @@ request --> service: review
 
 service -> vote**: new(resource.getVote(),user.getId,reviewId)
 vote --> service: vote
+service -> request: updateReview(reviewId), resource.getVote())
+request -> instance: PUT /reviews/vote/{reviewId}/{resource.getVote()}
+instance --> request: ok
+request --> service: ok
 service -> repo: save(vote)
 repo --> service: ok
 service --> Ctrl: ok

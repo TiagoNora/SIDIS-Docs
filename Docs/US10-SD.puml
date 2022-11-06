@@ -1,7 +1,7 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
-
+title Approve or reject a pending review
 autoactivate on
 autonumber
 

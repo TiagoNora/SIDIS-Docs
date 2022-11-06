@@ -1,6 +1,7 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
+title Obtain the reviews of a product, sorted by number of votes and reverse chronological publishing date
 autoactivate on
 autonumber
 
