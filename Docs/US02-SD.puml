@@ -23,14 +23,14 @@ repository --> service: product
 else product == null
 service -> request:retrieveProductFromApi(sku)
 request -> instance: GET /products/{sku}
-instance --> request: product & 200
+instance --> request: product
 request --> service: product
 end
 
 service -> details**: new(product)
 details --> service: productDetails
-service --> controller: productDetails & 200
-controller --> client: productDetails & 200
+service --> controller: productDetails
+controller --> client: productDetails
 
 
 @enduml

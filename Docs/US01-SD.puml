@@ -25,6 +25,6 @@ loop for each 'product' in 'list'
 end loop
 repository --> service: listOfProductCatalog
 service --> controller: listOfProductCatalog
-controller --> client: listOfProductCatalog & 200
+controller --> client: listOfProductCatalog
 
 @enduml

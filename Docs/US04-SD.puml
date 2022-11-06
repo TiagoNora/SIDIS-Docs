@@ -17,17 +17,22 @@ activate User
 
 User -> Ctrl : POST/reviews{sku}
 
-Ctrl -> Svc : create(reviewDTO, sku)
+Ctrl -> Svc : create(reviewDTO, sku, request)
 Svc -> repository : productRepo.findBySkuProduct(sku);
 alt success case
 repository --> Svc : product
 else product == null
 Svc -> request:retrieveProductFromApi(sku)
 request -> instance: GET /products/{sku}
-instance --> request: product & 200
+instance --> request: product
 request --> Svc: product
 end
-Svc -> review** : create(reviewDTO)
+Svc -> Svc: jwt = parseJwt(request)
+Svc -> request: makeRequestToAuthentication(jwt)
+request -> instance: GET /auth/search/{jwt}
+instance --> request: user
+request --> Svc: user
+Svc -> review** : create(reviewDTO,sku,user.getUserId)
 review --> Svc :  review
 Svc -> Repo : reviewRepo.save(review)
 Repo --> Svc : ok
