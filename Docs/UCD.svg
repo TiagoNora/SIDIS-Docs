@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="1168px" preserveAspectRatio="none" style="width:686px;height:1168px;background:#FFFFFF;" version="1.1" viewBox="0 0 686 1168" width="686px" zoomAndPan="magnify"><defs/><g><!--MD5=[47539729e2a0bb1969f0b89659c6c8d6]
+entity aCostumer--><g id="elem_aCostumer"><ellipse cx="75.5" cy="504.5" fill="#F1F1F1" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M75.5,512.5 L75.5,539.5 M62.5,520.5 L88.5,520.5 M75.5,539.5 L62.5,554.5 M75.5,539.5 L88.5,554.5 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="139" x="6" y="568.6738">Anonymous Customer</text></g><!--MD5=[358ecdeec086bd8c0c7949b4639c8a49]
+entity rCostumer--><g id="elem_rCostumer"><ellipse cx="75.5" cy="662.5" fill="#F1F1F1" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M75.5,670.5 L75.5,697.5 M62.5,678.5 L88.5,678.5 M75.5,697.5 L62.5,712.5 M75.5,697.5 L88.5,712.5 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="134" x="8.5" y="726.6738">Registered Customer</text></g><!--MD5=[1eac134bd398c59a4c90fba18858d819]
+entity moderator--><g id="elem_moderator"><ellipse cx="75.5" cy="54.5" fill="#F1F1F1" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M75.5,62.5 L75.5,89.5 M62.5,70.5 L88.5,70.5 M75.5,89.5 L62.5,104.5 M75.5,89.5 L88.5,104.5 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="65" x="43" y="118.6738">Moderator</text></g><g id="elem_US01"><ellipse cx="443.0095" cy="230.8019" fill="#F1F1F1" rx="144.5095" ry="31.3019" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="260" x="313.0095" y="233.6554">US01  - To obtain the catalog of products</text></g><g id="elem_US02"><ellipse cx="443.0095" cy="328.8019" fill="#F1F1F1" rx="144.5095" ry="31.3019" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="260" x="313.0095" y="331.6554">US02  - To obtain the details of a product</text></g><g id="elem_US03"><ellipse cx="442.779" cy="445.9558" fill="#F1F1F1" rx="237.779" ry="49.9558" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="451" x="217.279" y="448.8093">US03  - To search the catalog of products by product name or bar code</text></g><g id="elem_US04"><ellipse cx="443.0892" cy="1052.2178" fill="#F1F1F1" rx="131.5892" ry="28.7178" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="233" x="326.5892" y="1055.0714">US04  - To review and rate a product</text></g><g id="elem_US05"><ellipse cx="442.8951" cy="562.879" fill="#F1F1F1" rx="147.3951" ry="31.879" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="266" x="309.8951" y="565.7325">US05  - To obtain the reviews of a product</text></g><g id="elem_US06"><ellipse cx="442.8083" cy="1138.8617" fill="#F1F1F1" rx="104.8083" ry="23.3617" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="176" x="354.8083" y="1141.7152">US06  - To vote for a review</text></g><g id="elem_US07"><ellipse cx="442.8611" cy="871.1722" fill="#F1F1F1" rx="136.3611" ry="29.6722" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="243" x="321.3611" y="874.0257">US07  - To withdraw one of my reviews</text></g><g id="elem_US08"><ellipse cx="442.8951" cy="661.879" fill="#F1F1F1" rx="147.3951" ry="31.879" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="266" x="309.8951" y="664.7325">US08  - To obtain the reviews of a product</text></g><g id="elem_US09"><ellipse cx="443.0422" cy="34.9084" fill="#F1F1F1" rx="132.5422" ry="28.9084" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="235" x="325.5422" y="37.762">US09  - To obtain all pending reviews</text></g><g id="elem_US10"><ellipse cx="443.2496" cy="132.1499" fill="#F1F1F1" rx="151.2496" ry="32.6499" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="274" x="306.2496" y="135.0034">US10  - To approve/reject a pending review</text></g><g id="elem_US11"><ellipse cx="442.9207" cy="961.7841" fill="#F1F1F1" rx="116.9207" ry="25.7841" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="202" x="341.9207" y="964.6377">US11  - To obtain all my reviews</text></g><g id="elem_US12"><ellipse cx="442.8886" cy="767.7777" fill="#F1F1F1" rx="179.3886" ry="38.2777" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="332" x="276.8886" y="770.6312">US12  - To obtain the aggregated rating of a product</text></g><!--MD5=[318b492cb307b4341f3fa5bf436b4c80]
+link aCostumer to US01--><g id="link_aCostumer_US01"><path d="M84.72,495.84 C98.95,439.4 133.77,334.51 205,280 C231.53,259.7 264.43,247.29 297.2,239.81 " fill="none" id="aCostumer-to-US01" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="302.45,238.66,292.8021,236.6807,297.5661,239.731,294.5157,244.495,302.45,238.66" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[fdb44c70ca32126696f6352161c77615]
+link aCostumer to US02--><g id="link_aCostumer_US02"><path d="M97.79,495.8 C119.86,459.9 157.72,407.55 205,379 C234.76,361.03 270.02,349.45 304.13,342.01 " fill="none" id="aCostumer-to-US02" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="309.15,340.94,299.5133,338.9069,304.2602,341.9837,301.1833,346.7306,309.15,340.94" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[b9ef5025f62cc4bf3c3199a76b33da47]
+link aCostumer to US03--><g id="link_aCostumer_US03"><path d="M145.25,517.45 C183.63,508.21 233.19,496.27 280.77,484.82 " fill="none" id="aCostumer-to-US03" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="285.67,483.64,275.983,481.8616,280.8094,484.8123,277.8587,489.6386,285.67,483.64" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[25b94357164023bc3924351309862788]
+link rCostumer to US01--><g id="link_rCostumer_US01"><path d="M107.44,653.89 C120.87,635.56 135.64,612.68 145,590 C198.52,460.27 106.4,379.86 205,280 C228.61,256.09 260.59,242.34 293.42,234.73 " fill="none" id="rCostumer-to-US01" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="298.7,233.56,289.0521,231.5807,293.8161,234.631,290.7657,239.395,298.7,233.56" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[73e21f45a8bfa8d022e21304665a03df]
+link rCostumer to US02--><g id="link_rCostumer_US02"><path d="M106.21,653.99 C119.55,635.5 134.59,612.45 145,590 C186.02,501.55 133.72,445.52 205,379 C229.59,356.06 261.94,342.57 294.81,334.87 " fill="none" id="rCostumer-to-US02" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="300.09,333.68,290.4354,331.7336,295.2097,334.7677,292.1757,339.542,300.09,333.68" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[104920f705f764db3e7d70334afe8a18]
+link rCostumer to US03--><g id="link_rCostumer_US03"><path d="M102,653.96 C135.37,604.62 191.24,523.67 205,514 C223.24,501.19 243.86,490.77 265.14,482.31 " fill="none" id="rCostumer-to-US03" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="269.98,480.43,260.1419,479.9698,265.3211,482.245,263.0459,487.4241,269.98,480.43" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[9bb7018731015c12701ab47389730275]
+link rCostumer to US04--><g id="link_rCostumer_US04"><path d="M80.54,730.23 C89.76,797.16 118.7,935.21 205,1006 C233.49,1029.37 270.37,1042.12 306.51,1048.78 " fill="none" id="rCostumer-to-US04" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="311.84,1049.72,303.6739,1044.2141,306.9164,1048.8494,302.281,1052.0919,311.84,1049.72" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[bd35b0e0ab00046a31af5a5bdfc7daac]
+link rCostumer to US05--><g id="link_rCostumer_US05"><path d="M129.35,653.83 C151.76,639.18 178.73,623.48 205,613 C239.34,599.3 278.05,589.11 314.08,581.64 " fill="none" id="rCostumer-to-US05" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="319.37,580.56,309.7507,578.4459,314.4716,581.5626,311.3549,586.2834,319.37,580.56" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[134de7664654d0c32c81179116cc16de]
+link aCostumer to US05--><g id="link_aCostumer_US05"><path d="M145.25,539.45 C188.62,542.9 246.25,547.47 299.19,551.67 " fill="none" id="aCostumer-to-US05" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="304.29,552.07,295.6387,547.3631,299.306,551.6701,294.9989,555.3374,304.29,552.07" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[3d21f567a62dbac41fde1cf7a6e2422b]
+link rCostumer to US06--><g id="link_rCostumer_US06"><path d="M76.32,730.25 C78.17,811.5 94.73,1001.72 205,1098 C240.36,1128.87 290.37,1140.54 335.34,1143.91 " fill="none" id="rCostumer-to-US06" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="340.51,1144.27,331.7925,1139.6868,335.5208,1143.9412,331.2664,1147.6695,340.51,1144.27" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[52b6501d1369e2d86a4e94618545a4cb]
+link rCostumer to US07--><g id="link_rCostumer_US07"><path d="M103.37,730.29 C126.71,760.55 163.26,801.34 205,824 C237.06,841.4 274.7,852.41 310.41,859.35 " fill="none" id="rCostumer-to-US07" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="315.67,860.35,307.5721,854.7442,310.7574,859.419,306.0826,862.6043,315.67,860.35" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[374e64827fdb869bab86822bf49c657f]
+link rCostumer to US08--><g id="link_rCostumer_US08"><path d="M142.69,686.57 C186.43,682.98 245.47,678.13 299.55,673.69 " fill="none" id="rCostumer-to-US08" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="304.77,673.26,295.4697,670.019,299.7872,673.674,296.1321,677.9915,304.77,673.26" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[5e0d4474ae414444c3b2d8c088a77696]
+link aCostumer to US08--><g id="link_aCostumer_US08"><path d="M129.01,572.02 C151.48,586.74 178.59,602.53 205,613 C238.97,626.47 277.21,636.44 312.9,643.74 " fill="none" id="aCostumer-to-US08" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="318.15,644.8,310.1156,639.1036,313.2482,643.8139,308.5379,646.9465,318.15,644.8" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[98ca36647969103bff3ffbe37119b4fb]
+link moderator to US09--><g id="link_moderator_US09"><path d="M108.3,79.74 C156.14,73.32 249.09,60.86 324.76,50.72 " fill="none" id="moderator-to-US09" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="329.72,50.05,320.2646,47.2942,324.7652,50.7211,321.3383,55.2218,329.72,50.05" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[bced7ed7932a9c8c33b3905cba006787]
+link moderator to US10--><g id="link_moderator_US10"><path d="M108.3,88.18 C152.73,94.01 236.09,104.96 308.38,114.45 " fill="none" id="moderator-to-US10" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="313.56,115.13,305.1637,109.982,308.6034,114.4729,304.1124,117.9126,313.56,115.13" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[bde298a7ae4431ae7810d9124e95b4ec]
+link rCostumer to US11--><g id="link_rCostumer_US11"><path d="M87.07,730.05 C103.4,781.37 139.92,871.67 205,918 C238.36,941.75 280.85,953.77 320.61,959.56 " fill="none" id="rCostumer-to-US11" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="325.95,960.31,317.583,955.1145,320.9972,959.6249,316.4868,963.0391,325.95,960.31" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[2bd94c38bcd1ac5d912049a6b3134391]
+link aCostumer to US12--><g id="link_aCostumer_US12"><path d="M101.93,572.13 C135.23,621.59 191.01,702.66 205,712 C228.34,727.58 255.5,738.85 282.94,746.99 " fill="none" id="aCostumer-to-US12" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="288.07,748.48,280.5276,742.1466,283.2651,747.097,278.3147,749.8345,288.07,748.48" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[d9c098839e7ebe4abd1e06ed92219dc4]
+link rCostumer to US12--><g id="link_rCostumer_US12"><path d="M142.69,705.76 C188.82,715.35 251.95,728.48 308.35,740.21 " fill="none" id="rCostumer-to-US12" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="313.43,741.27,305.431,735.5241,308.5344,740.2537,303.8048,743.3571,313.43,741.27" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[72d72d4b3d0a571f4d37c5e8e3380727]
+@startuml
+'https://plantuml.com/use-case-diagram
+
+left to right direction
+
+
+:Anonymous Customer: as aCostumer
+:Registered Customer: as rCostumer
+:Moderator: as moderator
+
+
+(US01  - To obtain the catalog of products) as US01
+(US02  - To obtain the details of a product) as US02
+(US03  - To search the catalog of products by product name or bar code) as US03
+(US04  - To review and rate a product) as US04
+(US05  - To obtain the reviews of a product) as US05
+(US06  - To vote for a review) as US06
+(US07  - To withdraw one of my reviews) as US07
+(US08  - To obtain the reviews of a product) as US08
+(US09  - To obtain all pending reviews) as US09
+(US10  - To approve/reject a pending review) as US10
+(US11  - To obtain all my reviews) as US11
+(US12  - To obtain the aggregated rating of a product) as US12
+
+'package 1'
+aCostumer - -> US01
+aCostumer - -> US02
+aCostumer - -> US03
+
+rCostumer - -> US01
+rCostumer - -> US02
+rCostumer - -> US03
+
+'package 2'
+rCostumer - -> US04
+rCostumer - -> US05
+aCostumer - -> US05
+
+'package 3'
+rCostumer - -> US06
+rCostumer - -> US07
+rCostumer - -> US08
+aCostumer - -> US08
+
+'package 4'
+moderator - -> US09
+moderator - -> US10
+rCostumer - -> US11
+
+'package 5'
+aCostumer - -> US12
+rCostumer - -> US12
+
+
+
+
+
+@enduml
+
+@startuml
+
+left to right direction
+
+
+:Anonymous Customer: as aCostumer
+:Registered Customer: as rCostumer
+:Moderator: as moderator
+
+
+(US01  - To obtain the catalog of products) as US01
+(US02  - To obtain the details of a product) as US02
+(US03  - To search the catalog of products by product name or bar code) as US03
+(US04  - To review and rate a product) as US04
+(US05  - To obtain the reviews of a product) as US05
+(US06  - To vote for a review) as US06
+(US07  - To withdraw one of my reviews) as US07
+(US08  - To obtain the reviews of a product) as US08
+(US09  - To obtain all pending reviews) as US09
+(US10  - To approve/reject a pending review) as US10
+(US11  - To obtain all my reviews) as US11
+(US12  - To obtain the aggregated rating of a product) as US12
+
+aCostumer - -> US01
+aCostumer - -> US02
+aCostumer - -> US03
+
+rCostumer - -> US01
+rCostumer - -> US02
+rCostumer - -> US03
+
+rCostumer - -> US04
+rCostumer - -> US05
+aCostumer - -> US05
+
+rCostumer - -> US06
+rCostumer - -> US07
+rCostumer - -> US08
+aCostumer - -> US08
+
+moderator - -> US09
+moderator - -> US10
+rCostumer - -> US11
+
+aCostumer - -> US12
+rCostumer - -> US12
+
+
+
+
+
+@enduml
+
+PlantUML version 1.2022.12(Sun Oct 23 19:12:26 WEST 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: Cp1252
+Language: pt
+Country: PT
+--></g></svg>

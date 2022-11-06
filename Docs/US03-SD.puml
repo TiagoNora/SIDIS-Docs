@@ -10,7 +10,6 @@ participant "ProductsController" as controller
 participant "productService:ProductsService" as service
 participant "productRepo:ProductsRepository" as repository
 participant ":ProductDetails" as details
-participant "product:Product" as product
 
 activate client
 
