@@ -8,19 +8,21 @@ autonumber
 actor "Client" as Client
 participant "VotesController" as Ctrl
 participant "voteService:VoteService" as Svc
-participant "productRepository:ProductRepository" as productRepository
 participant "reviewRepository:ReviewRepository" as reviewRepository
+participant "requestService:RequestService" as request
+participant ":ProductInstance" as instance
 
 activate Client
 
-Client -> Ctrl : GET/votes/{SKU}
-Ctrl -> Svc : voteService.findAllReviewsWithVotes(sku)
-Svc -> productRepository: productRepository.findBySkuProduct(sku);
-productRepository --> Svc: product
-Svc -> reviewRepository: reviewRepository.findAllWithVotes(sku);
+Client -> Ctrl : GET /order/{SKU}
+Ctrl -> Svc : voteService.orderAllReviewsByVotes(sku)
+Svc -> request: getStatusCodeOfProduct(sku)
+request -> instance: GET /products/{sku}
+instance --> request: ok
+request --> Svc: ok
+Svc -> reviewRepository: reviewRepository.orderByVotes(sku)
 reviewRepository --> Svc: reviews
-Svc -> Svc: product.setReviews(reviews)
-Svc --> Ctrl: product
-Ctrl --> Client: product
+Svc --> Ctrl: reviews
+Ctrl --> Client: reviews
 
 @enduml
