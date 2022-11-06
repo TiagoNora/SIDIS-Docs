@@ -33,7 +33,7 @@ Svc -> request: makeRequestToAuthentication(jwt)
 request -> instanceAuth: GET /auth/search/{jwt}
 instanceAuth --> request: user
 request --> Svc: user
-Svc -> review** : create(reviewDTO,sku,user.getUserId)
+Svc -> review** : create(reviewDTO,sku,user.getId())
 review --> Svc :  review
 Svc -> Repo : reviewRepo.save(review)
 Repo --> Svc : ok
