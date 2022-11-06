@@ -1,7 +1,7 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
-
+title Withdraw one of my reviews.
 autoactivate on
 autonumber
 
@@ -9,6 +9,9 @@ actor "Client" as User
 participant "ReviewController" as Ctrl
 participant "reviewService:ReviewService" as service
 participant "reviewRepositoryReviewRepository" as repo
+participant "requestService:RequestService" as request
+participant ":ReviewInstance" as instance
+participant ":AuthInstance" as instanceAuth
 
 
 
@@ -16,11 +19,20 @@ participant "reviewRepositoryReviewRepository" as repo
 activate User
 User -> Ctrl : DELETE review/{idReview}
 Ctrl -> service : reviewService.deleteById(idReview)
-service -> repo : reviewRepository.findByIdReview(idReview)
-repo --> service: review
-alt review.getVotes().isEmpty() == true
-service -> repo : reviewRepository.delete(review);
-end
+
+service -> request : parseJwt(request)
+request --> service: jwt
+service -> request: makeRequestToAuthentication(jwt)
+request -> instanceAuth: GET /auth/search/{jwt}
+instanceAuth --> request: user
+request --> service: user
+
+service -> request:retrieveProductFromApi(sku)
+request -> instance: GET /products/{sku}
+instance --> request: product
+request --> service: product
+service -> repo: reviewRepo.deleteIdReview(idReview))
+
 repo --> service: ok
 service --> Ctrl: ok
 Ctrl --> User: ok
