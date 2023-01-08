@@ -52,6 +52,3 @@
 
 ![Logic View nivel 2](LogicView2.svg)
 
-## 3 - Observations
-
-The postman collection is available with the name [**SISIDIS.postman_collection.json**](SISIDIS.postman_collection.json)
