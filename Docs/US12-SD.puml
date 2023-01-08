@@ -7,6 +7,7 @@ autoactivate on
 autonumber
 
 actor "Client" as Client
+participant ":ReviewQ_n" as reviewQ
 participant "ReviewController" as Ctrl
 participant "reviewService:reviewService" as Svc
 participant "reviewRepository:reviewRepository" as Repo
@@ -14,14 +15,16 @@ participant ":AggregateRating" as aggregateRating
 
 activate Client
 
-Client -> Ctrl : GET/reviews/{sku}/rating
+Client -> reviewQ : GET/reviews/{sku}/rating
+reviewQ -> Ctrl: GET/reviews/{sku}/rating
 Ctrl -> Svc : productService.findAllRates(sku)
 Svc -> Repo: productRepository.findAllApprovedReviewsBySku(sku)
 Repo --> Svc: reviews
-Svc -> aggregateRating**: new ReviewDTO(review))
-aggregateRating --> Svc: rating
-Svc --> Ctrl: rating
-Ctrl --> Client: rating
+Svc -> aggregateRating**: new AggregateRating(reviews))
+aggregateRating --> Svc: aggregateRating
+Svc --> Ctrl: aggregateRating
+Ctrl --> reviewQ: aggregateRating
+reviewQ --> Client: aggregateRating
 
 
 

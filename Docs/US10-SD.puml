@@ -23,8 +23,7 @@ participant ":VoteC_n" as voteC_n
 participant "ModeratorController" as controller
 participant "reviewService:ReviewService" as service
 participant "reviewRepository:ReviewRepository" as repository
-participant "requestService:RequestService" as request
-participant ":AuthInstance" as instanceAuth
+participant ":JWTRepository" as jwtRepository
 
 
 participant ":MessageBroker" as broker
@@ -34,12 +33,9 @@ client -> reviewC: PUT /moderator/review/{idReview}
 reviewC -> controller: PUT /moderator/review/{idReview}
 controller -> service : reviewService.changeStatus(idReview,resource)
 
-service -> request : parseJwt(request)
-request --> service: jwt
-service -> request: makeRequestToAuthentication(jwt)
-request -> instanceAuth: GET /auth/search/{jwt}
-instanceAuth --> request: user
-request --> service: user
+service --> service : parseJwt(request)
+service -> jwtRepository: findByJWT(jwt)
+jwtRepository --> service: user
 alt user.getRoles = "MODERATOR"
     service -> repository: reviewRepository.updateReview(resource,idReview)
     repository --> service: ok

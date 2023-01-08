@@ -28,9 +28,8 @@ participant ":VoteC_n" as voteC_n
 participant "ReviewController" as Ctrl
 participant "reviewService:ReviewService" as service
 participant "reviewRepositoryReviewRepository" as repo
-participant "requestService:RequestService" as request
-participant ":ReviewInstance" as instance
-participant ":AuthInstance" as instanceAuth
+participant ":JWTRepository" as jwtRepository
+participant ":ProductRepository" as productRepository
 
 participant ":MessageBroker" as broker
 
@@ -42,18 +41,14 @@ User -> reviewC : DELETE review/{idReview}
 reviewC -> Ctrl: DELETE review/{idReview}
 Ctrl -> service : reviewService.deleteById(idReview)
 
-service -> request : parseJwt(request)
-request --> service: jwt
-service -> request: makeRequestToAuthentication(jwt)
-request -> instanceAuth: GET /auth/search/{jwt}
-instanceAuth --> request: user
-request --> service: user
+service --> service : parseJwt(request)
+service -> jwtRepository: findByJWT(jwt)
+jwtRepository --> service: user
 
-service -> request:retrieveProductFromApi(sku)
-request -> instance: GET /products/{sku}
-instance --> request: product
-request --> service: product
+service -> productRepository :findBySku(sku)
+productRepository --> service: product
 service -> repo: reviewRepo.deleteIdReview(idReview))
+repo --> service: ok
 repo -> broker: publish "Review.deleted, {Review}"
 
 reviewC_n <- broker: notify "Review.deleted, {Review}"
@@ -67,7 +62,7 @@ voteC -> voteC: delete(Review)
 voteC_n <- broker: notify "Review.deleted, {Review}"
 voteC_n -> voteC_n: delete(Review)
 
-repo --> service: ok
+
 service --> Ctrl: ok
 Ctrl --> reviewC: ok
 reviewC --> User: ok

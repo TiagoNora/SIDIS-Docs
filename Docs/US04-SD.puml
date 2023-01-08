@@ -16,9 +16,6 @@ participant ":ReviewQ_n" as reviewQ_n
 participant "ReviewController" as Ctrl
 participant "reviewService:ReviewService" as Svc
 participant "productRepo:ProductRepository" as repository
-participant "requestService:RequestService" as request
-participant ":ProductInstance" as instance
-participant ":AuthInstance" as instanceAuth
 participant "review:Review" as review
 participant "reviewRepo:ReviewRepository" as Repo
 
@@ -38,19 +35,12 @@ reviewC -> Ctrl: POST/reviews{sku}
 
 Ctrl -> Svc : create(reviewDTO, sku, request)
 Svc -> repository : productRepo.findBySkuProduct(sku);
-alt success case
 repository --> Svc : product
-else product == null
-Svc -> request:retrieveProductFromApi(sku)
-request -> instance: GET /products/{sku}
-instance --> request: product
-request --> Svc: product
-end
+
 Svc -> Svc: jwt = parseJwt(request)
-Svc -> request: makeRequestToAuthentication(jwt)
-request -> instanceAuth: GET /auth/search/{jwt}
-instanceAuth --> request: user
-request --> Svc: user
+
+
+
 Svc -> review** : create(reviewDTO,sku,user.getId())
 review --> Svc :  review
 Svc -> Repo : reviewRepo.save(review)

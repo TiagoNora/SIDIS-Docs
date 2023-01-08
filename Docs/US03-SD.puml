@@ -6,6 +6,7 @@ autoactivate on
 autonumber
 
 actor "Client" as client
+participant ":ProductQ_n" as productQ
 participant "ProductsController" as controller
 participant "productService:ProductsService" as service
 participant "productRepo:ProductsRepository" as repository
@@ -13,7 +14,8 @@ participant ":ProductDetails" as details
 
 activate client
 
-client -> controller: GET /products/search/{skuOrName}
+client -> productQ: GET /products/search/{skuOrName}
+productQ -> controller: GET /products/search/{skuOrName}
 controller -> service : productService.findByNameOrSuk(skuOrName)
 service -> repository: productRepo.findByNameOrSuk(skuOrName)
 
@@ -24,7 +26,8 @@ loop for each 'product' in 'list'
 end loop
 repository --> service: listOfProductDetails
 service --> controller: listOfProductDetails
-controller --> client: listOfProductDetails
+controller --> productQ: listOfProductDetails
+productQ --> client: listOfProductDetails
 
 
 @enduml

@@ -5,20 +5,21 @@ autoactivate on
 autonumber
 
 actor "Client" as Client
-
+participant ":ReviewQ_n" as reviewQ
 participant "ReviewController" as CtrlR
 participant "reviewService:ReviewService" as SvcR
-participant "productRepo:ProductRepository" as RepoP
 participant "reviewRepo:ReviewRepository" as RepoR
 
 activate Client
 
-Client -> CtrlR : GET/reviews{SKU}
+Client -> reviewQ : GET/reviews{SKU}
+reviewQ -> CtrlR: GET/reviews{SKU}
 CtrlR -> SvcR : reviewService.findAllReviews(sku)
 SvcR -> RepoR: reviewRepo.findAll(sku)
 RepoR --> SvcR: reviews
 SvcR --> CtrlR: reviews
-CtrlR --> "Client": reviews
+CtrlR --> reviewQ: reviews
+reviewQ -> Client: reviews
 
 
 

@@ -15,9 +15,8 @@ participant ":ReviewC_n" as reviewC_n
 participant "VotesController" as Ctrl
 participant "votesService:VotesService" as service
 participant "voteRepository:VoteRepository" as repo
-participant "requestService:RequestService" as request
-participant ":ReviewInstance" as instance
-participant ":AuthInstance" as instanceAuth
+participant ":JWTRepository" as jwtRepository
+participant ":ReviewRepository" as reviewRepository
 
 participant "vote:Vote" as vote
 participant ":MessageBroker" as broker
@@ -33,24 +32,18 @@ activate User
 User -> voteC : POST /votes/{idReview}
 voteC -> Ctrl:  POST /votes/{idReview}
 Ctrl -> service : service.create(resource,idReview,idUser);
-service -> request: parseJwt(request)
-request --> service: jwt
-service -> request: makeRequestToAuthentication(jwt)
-request -> instanceAuth: GET /auth/search/{jwt}
-instanceAuth --> request: user
-request --> service: user
+service --> service: parseJwt(request)
 
-service -> request:retrieveReviewFromApi(reviewId)
-request -> instance: GET /reviews/search/{reviewId}
-instance --> request: review
-request --> service: review
+service -> jwtRepository: findByJWT(jwt)
+jwtRepository --> service: user
+
+service -> reviewRepository:findById(reviewId)
+reviewRepository --> service: review
 
 service -> vote**: new(resource.getVote(),user.getId,reviewId)
 vote --> service: vote
-service -> request: updateReview(reviewId), resource.getVote())
-request -> instance: PUT /reviews/vote/{reviewId}/{resource.getVote()}
-instance --> request: ok
-request --> service: ok
+service -> reviewRepository: updateReview(reviewId), resource.getVote())
+reviewRepository --> service: ok
 service -> repo: save(vote)
 repo --> service: ok
 service -> broker: publish "Vote.created, {Vote}"
