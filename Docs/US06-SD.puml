@@ -56,10 +56,15 @@ repo --> service: ok
 service -> broker: publish "Vote.created, {Vote}"
 
 voteC_n <- broker: notify "Vote.created, {Vote}"
+voteC_n --> voteC_n: save(Vote)
 voteQ <- broker: notify "Vote.created, {Vote}"
+voteQ --> voteQ: save(Vote)
 voteQ_n <- broker: notify "Vote.created, {Vote}"
+voteQ_n --> voteQ_n: save(Vote)
 reviewC <- broker: notify "Vote.created, {Vote}"
+reviewC --> reviewC: save(Vote)
 reviewC_n <- broker: notify "Vote.created, {Vote}"
+reviewC_n --> reviewC_n: save(Vote)
 
 service --> Ctrl: ok
 Ctrl --> voteC: ok
