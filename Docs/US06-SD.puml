@@ -6,6 +6,12 @@ autoactivate on
 autonumber
 
 actor "Client" as User
+participant ":VoteC" as voteC
+participant ":VoteC_n" as voteC_n
+participant ":VoteQ" as voteQ
+participant ":VoteQ_n" as voteQ_n
+participant ":ReviewC" as reviewC
+participant ":ReviewC_n" as reviewC_n
 participant "VotesController" as Ctrl
 participant "votesService:VotesService" as service
 participant "voteRepository:VoteRepository" as repo
@@ -14,12 +20,18 @@ participant ":ReviewInstance" as instance
 participant ":AuthInstance" as instanceAuth
 
 participant "vote:Vote" as vote
+participant ":MessageBroker" as broker
 
 
-
+voteC_n -> broker: subscribe "Vote.created"
+voteQ -> broker: subscribe "Vote.created"
+voteQ_n -> broker: subscribe "Vote.created"
+reviewC -> broker: subscribe "Vote.created"
+reviewC_n -> broker: subscribe "Vote.created"
 
 activate User
-User -> Ctrl : POST /votes/{idReview}
+User -> voteC : POST /votes/{idReview}
+voteC -> Ctrl:  POST /votes/{idReview}
 Ctrl -> service : service.create(resource,idReview,idUser);
 service -> request: parseJwt(request)
 request --> service: jwt
@@ -41,7 +53,16 @@ instance --> request: ok
 request --> service: ok
 service -> repo: save(vote)
 repo --> service: ok
+service -> broker: publish "Vote.created, {Vote}"
+
+voteC_n <- broker: notify "Vote.created, {Vote}"
+voteQ <- broker: notify "Vote.created, {Vote}"
+voteQ_n <- broker: notify "Vote.created, {Vote}"
+reviewC <- broker: notify "Vote.created, {Vote}"
+reviewC_n <- broker: notify "Vote.created, {Vote}"
+
 service --> Ctrl: ok
-Ctrl --> User: ok
+Ctrl --> voteC: ok
+voteC --> User: ok
 
 @enduml
