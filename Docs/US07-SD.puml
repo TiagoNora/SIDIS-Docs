@@ -5,7 +5,26 @@ title Withdraw one of my reviews
 autoactivate on
 autonumber
 
+
+
+
 actor "Client" as User
+
+
+
+reviewC_n -> broker: subscribe "Vote.deleted"
+reviewQ -> broker: subscribe "Vote.deleted"
+reviewQ_n -> broker: subscribe "Vote.deleted"
+voteC -> broker: subscribe "Vote.deleted"
+voteC_n -> broker: subscribe "Vote.deleted"
+
+participant ":ReviewC" as reviewC
+participant ":ReviewC_n" as reviewC_n
+participant ":ReviewQ" as reviewQ
+participant ":ReviewQ_n" as reviewQ_n
+participant ":VoteC" as voteC
+participant ":VoteC_n" as voteC_n
+
 participant "ReviewController" as Ctrl
 participant "reviewService:ReviewService" as service
 participant "reviewRepositoryReviewRepository" as repo
@@ -13,11 +32,14 @@ participant "requestService:RequestService" as request
 participant ":ReviewInstance" as instance
 participant ":AuthInstance" as instanceAuth
 
+participant ":MessageBroker" as broker
+
 
 
 
 activate User
-User -> Ctrl : DELETE review/{idReview}
+User -> reviewC : DELETE review/{idReview}
+reviewC -> Ctrl: DELETE review/{idReview}
 Ctrl -> service : reviewService.deleteById(idReview)
 
 service -> request : parseJwt(request)
@@ -32,10 +54,18 @@ request -> instance: GET /products/{sku}
 instance --> request: product
 request --> service: product
 service -> repo: reviewRepo.deleteIdReview(idReview))
+repo -> broker: publish "Vote.deleted, {Vote}"
+
+reviewC_n <- broker: notify "Vote.deleted"
+reviewQ <- broker: notify "Vote.deleted"
+reviewQ_n <- broker: notify "Vote.deleted"
+voteC <- broker: notify "Vote.deleted"
+voteC_n <- broker: notify "Vote.deleted"
 
 repo --> service: ok
 service --> Ctrl: ok
-Ctrl --> User: ok
+Ctrl --> reviewC: ok
+reviewC --> User: ok
 
 
 
