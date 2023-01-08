@@ -22,6 +22,7 @@ left to right direction
 (US11  - To obtain all my reviews) as US11
 (US12  - To obtain the aggregated rating of a product) as US12
 (US13  - To vote in a review that doesn't exist yet) as US13
+(US14  - To create a product) as US14
 
 'package 1'
 aCostumer --> US01
@@ -53,6 +54,7 @@ aCostumer --> US12
 rCostumer --> US12
 
 rCostumer --> US13
+moderator --> US14
 
 
 

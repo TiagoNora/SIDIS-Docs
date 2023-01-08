@@ -15,9 +15,7 @@ participant ":ProductQ_n" as productQ_n
 participant "ReviewController" as Ctrl
 participant "reviewService:ReviewService" as Svc
 participant "productRepo:ProductRepository" as repository
-participant "requestService:RequestService" as request
-participant ":ProductInstance" as instance
-participant ":AuthInstance" as instanceAuth
+participant ":JWTRepository" as jwtRepository
 participant "Product:Product" as product
 participant "ProductRepo:ProductRepository" as Repo
 
@@ -39,21 +37,18 @@ productC -> Ctrl: POST/create
 Ctrl -> Svc : create(ProductDetailsDTO, request)
 
 Svc -> Svc: jwt = parseJwt(request)
-Svc -> request: makeRequestToAuthentication(jwt)
-request -> instanceAuth: GET /auth/search/{jwt}
-instanceAuth --> request: user
-request --> Svc: user
-Svc -> product** : create(reviewDTO,sku,user.getId())
-product --> Svc :  Product
-Svc -> Repo : productRepo.save(Product)
+Svc -> jwtRepository: findByJWT(jwt)
+jwtRepository --> Svc: user
+Svc -> product** : create(productDetailsDTO)
+product --> Svc :  product
+Svc -> Repo : productRepo.save(product)
 Repo --> Svc : ok
 Svc -> broker: publish "product, {Product}"
 
 reviewC_n <- broker: notify "product, {Product}"
 reviewC_n --> reviewC_n: save(Product)
 
-reviewC_n <- broker: notify "product, {Product}"
-reviewC_n --> reviewC_n: save(Product)
+
 reviewQ_n <- broker: notify "product, {Product}"
 reviewQ_n --> reviewQ_n: save(Product)
 

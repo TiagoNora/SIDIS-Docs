@@ -41,7 +41,10 @@
 ![US12](US12-SD.svg)
 
 ### 1.13 - US13 (To vote in a review that doesn't exist yet)
-![US13](US13-SD.svg)
+![US13](US013-SD.svg)
+
+### 1.14 - US14 (To create a product)
+![US14](US014-SD.svg)
 
 ## 2 - Logic View
 
