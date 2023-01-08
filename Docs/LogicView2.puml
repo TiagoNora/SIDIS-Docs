@@ -1,0 +1,24 @@
+@startuml
+'https://plantuml.com/component-diagram
+
+
+package "Estrutura API" {
+  folder "controller" {
+      }
+  folder "model" {
+      }
+  folder "repository" {
+      }
+  folder "service" {
+      }
+}
+"controller"-->"service"
+"service"-->"model"
+"service"-right->"repository"
+"repository"-->"model"
+
+
+
+
+
+@enduml
