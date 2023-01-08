@@ -12,11 +12,11 @@ actor "Client" as User
 
 
 
-reviewC_n -> broker: subscribe "Vote.deleted"
-reviewQ -> broker: subscribe "Vote.deleted"
-reviewQ_n -> broker: subscribe "Vote.deleted"
-voteC -> broker: subscribe "Vote.deleted"
-voteC_n -> broker: subscribe "Vote.deleted"
+reviewC_n -> broker: subscribe "Review.deleted"
+reviewQ -> broker: subscribe "Review.deleted"
+reviewQ_n -> broker: subscribe "Review.deleted"
+voteC -> broker: subscribe "Review.deleted"
+voteC_n -> broker: subscribe "Review.deleted"
 
 participant ":ReviewC" as reviewC
 participant ":ReviewC_n" as reviewC_n
@@ -54,13 +54,18 @@ request -> instance: GET /products/{sku}
 instance --> request: product
 request --> service: product
 service -> repo: reviewRepo.deleteIdReview(idReview))
-repo -> broker: publish "Vote.deleted, {Vote}"
+repo -> broker: publish "Review.deleted, {Review}"
 
-reviewC_n <- broker: notify "Vote.deleted"
-reviewQ <- broker: notify "Vote.deleted"
-reviewQ_n <- broker: notify "Vote.deleted"
-voteC <- broker: notify "Vote.deleted"
-voteC_n <- broker: notify "Vote.deleted"
+reviewC_n <- broker: notify "Review.deleted, {Review}"
+reviewC_n -> reviewC_n: delete(Review)
+reviewQ <- broker: notify "Review.deleted, {Review}"
+reviewQ -> reviewQ: delete(Review)
+reviewQ_n <- broker: notify "Review.deleted, {Review}"
+reviewQ_n -> reviewQ_n: delete(Review)
+voteC <- broker: notify "Review.deleted, {Review}"
+voteC -> voteC: delete(Review)
+voteC_n <- broker: notify "Review.deleted, {Review}"
+voteC_n -> voteC_n: delete(Review)
 
 repo --> service: ok
 service --> Ctrl: ok
