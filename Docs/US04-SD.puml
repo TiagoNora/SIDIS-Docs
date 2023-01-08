@@ -5,6 +5,14 @@ autoactivate on
 autonumber
 
 actor "ACME" as User
+
+participant ":ReviewC1" as reviewC
+participant ":ReviewC_n" as reviewC_n
+participant ":VoteC1" as voteC
+participant ":VoteC_n" as voteC_n
+participant ":ReviewQ1" as reviewQ
+participant ":ReviewQ_n" as reviewQ_n
+
 participant "ReviewController" as Ctrl
 participant "reviewService:ReviewService" as Svc
 participant "productRepo:ProductRepository" as repository
@@ -14,9 +22,19 @@ participant ":AuthInstance" as instanceAuth
 participant "review:Review" as review
 participant "reviewRepo:ReviewRepository" as Repo
 
-activate User
+participant ":MessageBroker" as broker
 
-User -> Ctrl : POST/reviews{sku}
+
+reviewC_n -> broker: subscribe "Review.created"
+voteC -> broker: subscribe "Review.created"
+voteC_n -> broker: subscribe "Review.created"
+reviewQ -> broker: subscribe "Review.created"
+reviewQ_n -> broker: subscribe "Review.created"
+
+activate User
+User -> reviewC : POST/reviews{sku}
+reviewC -> Ctrl: POST/reviews{sku}
+
 
 Ctrl -> Svc : create(reviewDTO, sku, request)
 Svc -> repository : productRepo.findBySkuProduct(sku);
@@ -37,7 +55,20 @@ Svc -> review** : create(reviewDTO,sku,user.getId())
 review --> Svc :  review
 Svc -> Repo : reviewRepo.save(review)
 Repo --> Svc : ok
+
+Svc -> broker: publish "Review.created, {Review}"
+reviewC_n <- broker: notify "Review.created, {Review}"
+reviewC_n --> reviewC_n: save(Review)
+voteC <- broker: notify "Review.created, {Review}"
+voteC --> voteC: save(Review)
+voteC_n <- broker: notify "Review.created, {Review}"
+voteC_n --> voteC_n: save(Review)
+reviewQ <- broker: notify "Review.created, {Review}"
+reviewQ --> reviewQ: save(Review)
+reviewQ_n <- broker: notify "Review.created, {Review}"
+reviewQ_n --> reviewQ_n: save(Review)
 Svc --> Ctrl : ok
-Ctrl --> User : ok
+Ctrl --> reviewC : ok
+reviewC -> User: ok
 
 @enduml

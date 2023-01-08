@@ -1,31 +1,44 @@
 @startuml
 
 [App]
-[Products]
-[Review]
-[Votes]
-[Authentication]
-[Products_n]
-[Review_n]
-[Votes_n]
-[Authentication_n]
+[ProductsC]
+[ReviewC]
+[VotesC]
+[AuthenticationC]
+[ProductsQ]
+[ReviewQ]
+[VotesQ]
+[AuthenticationQ]
+[ProductsC_n]
+[ReviewC_n]
+[VotesC_n]
+[AuthenticationC_n]
+[ProductsQ_n]
+[ReviewQ_n]
+[VotesQ_n]
+[AuthenticationQ_n]
 
- App --(0 Products
- App --(0 Review
- App --(0 Votes
- App --(0 Authentication
+ App --(0 ProductsC
+ App --(0 ReviewC
+ App --(0 VotesC
+ App --(0 AuthenticationC
 
- Products --(0 Products_n
- Review --(0 Review_n
- Votes --(0 Votes_n
- Authentication --(0 Authentication_n
 
- Products --(0 Authentication
+ App --(0 ProductsQ
+ App --(0 ReviewQ
+ App --(0 VotesQ
+ App --(0 AuthenticationQ
 
- Review --(0 Authentication
- Review --(0 Products
- Review --(0)-- Votes
+ App --(0 ProductsC_n
+ App --(0 ReviewC_n
+ App--(0 VotesC_n
+ App --(0 AuthenticationC_n
 
- Votes --(0 Authentication
+ App --(0 ProductsQ_n
+ App --(0 ReviewQ_n
+ App --(0 VotesQ_n
+ App --(0 AuthenticationQ_n
+
+
 
 @enduml
