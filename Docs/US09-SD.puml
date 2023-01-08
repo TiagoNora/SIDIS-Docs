@@ -6,23 +6,21 @@ autoactivate on
 autonumber
 
 actor "Client" as client
+participant ":ReviewQ_n" as reviewQ
 participant "ModeratorController" as controller
 participant "reviewService:ReviewService" as service
 participant "reviewRepository:ReviewRepository" as repository
 participant ":ReviewDTO" as reviewUser
-participant "requestService:RequestService" as request
-participant ":AuthInstance" as instanceAuth
+participant ":JWTRepository" as jwtRepository
 
 activate client
 
-client -> controller: GET /moderator/reviews
+client -> reviewQ: GET /moderator/reviews
+reviewQ -> controller: GET /moderator/reviews
 controller -> service : reviewService.findAllReviewsPending()
-service -> request : parseJwt(request)
-request --> service: jwt
-service -> request: makeRequestToAuthentication(jwt)
-request -> instanceAuth: GET /auth/search/{jwt}
-instanceAuth --> request: user
-request --> service: user
+service --> service : parseJwt(request)
+service -> jwtRepository: findByJWT(jwt)
+jwtRepository --> service: user
 alt user.getRoles = "MODERATOR"
 service -> repository: reviewRepository.findAllPending();
 repository --> service: reviews
@@ -33,6 +31,7 @@ loop for each "review" in reviews
 end loop
 end
 service --> controller: reviewsPending
-controller --> client: reviewsPending
+controller --> reviewQ: reviewsPending
+reviewQ --> client: reviewsPending
 
 @enduml

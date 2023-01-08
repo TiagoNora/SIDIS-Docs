@@ -6,23 +6,23 @@ autoactivate on
 autonumber
 
 actor "Client" as Client
+participant ":VotesC_n" as votesC
 participant "VotesController" as Ctrl
 participant "voteService:VoteService" as Svc
 participant "reviewRepository:ReviewRepository" as reviewRepository
-participant "requestService:RequestService" as request
-participant ":ProductInstance" as instance
+participant ":ReviewRepository" as productRepository
 
 activate Client
 
-Client -> Ctrl : GET /order/{SKU}
+Client -> votesC : GET /order/{SKU}
+votesC -> Ctrl: GET /order/{SKU}
 Ctrl -> Svc : voteService.orderAllReviewsByVotes(sku)
-Svc -> request: getStatusCodeOfProduct(sku)
-request -> instance: GET /products/{sku}
-instance --> request: ok
-request --> Svc: ok
+Svc -> productRepository: findBySku(sku)
+productRepository --> Svc: ok
 Svc -> reviewRepository: reviewRepository.orderByVotes(sku)
 reviewRepository --> Svc: reviews
 Svc --> Ctrl: reviews
-Ctrl --> Client: reviews
+Ctrl --> votesC: reviews
+votesC --> Client: reviews
 
 @enduml

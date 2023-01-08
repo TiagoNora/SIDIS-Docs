@@ -6,31 +6,30 @@ autoactivate on
 autonumber
 
 actor "Client" as client
+participant ":ProductQ_n" as productQ
 participant "ProductsController" as controller
 participant "productService:ProductsService" as service
 participant "productRepo:ProductsRepository" as repository
-participant "requestService:RequestService" as request
-participant ":ProductInstance" as instance
 participant ":ProductDetails" as details
 
 activate client
 
-client -> controller: GET /products/{sku}
+client -> productQ: GET /products/{sku}
+productQ -> controller: GET /products/{sku}
 controller -> service : productService.findBySku(sku)
 service -> repository: productRepo.findBySuk(sku)
-alt success case
+
 repository --> service: product
-else product == null
-service -> request:retrieveProductFromApi(sku)
-request -> instance: GET /products/{sku}
-instance --> request: product
-request --> service: product
-end
+
+
+
+
 
 service -> details**: new(product)
 details --> service: productDetails
 service --> controller: productDetails
-controller --> client: productDetails
+controller --> productQ: productDetails
+productQ --> client: productDetails
 
 
 @enduml

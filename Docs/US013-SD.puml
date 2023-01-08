@@ -19,6 +19,7 @@ participant "VoteRepository:VoteRepository" as Repo
 
 participant "ReviewService:ReviewService" as serviceReview
 participant "ReviewRepository:ReviewRepository" as RepoReview
+participant ":JWTRepository" as jwtRepository
 
 participant ":Request" as request
 participant ":MessageBroker" as broker
@@ -30,10 +31,9 @@ reviewC_n -> broker: subscribe "VoteRev"
 
 Client -> Ctrl : POST/Vote/sku/{sku}
 Ctrl -> service : VoteService.createVote(resource,sku,request);
-service -> request: parseJwt(request)
-request --> service: jwt
-service -> request: makeRequestToAuthentication(jwt)
-request --> service: UserDetailsDTO
+service --> service: parseJwt(request)
+service -> jwtRepository: findByJWT(jwt)
+jwtRepository --> service: UserDetailsDTO
 service --> Ctrl: accepted
 Ctrl --> Client: accepted
 
