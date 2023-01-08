@@ -6,15 +6,32 @@ autoactivate on
 autonumber
 
 actor "Client" as client
+
+reviewC_n -> broker: subscribe "Review.update"
+reviewQ -> broker: subscribe "Review.update"
+reviewQ_n -> broker: subscribe "Review.update"
+voteC -> broker: subscribe "Review.update"
+voteC_n -> broker: subscribe "Review.update"
+
+participant ":ReviewC" as reviewC
+participant ":ReviewC_n" as reviewC_n
+participant ":ReviewQ" as reviewQ
+participant ":ReviewQ_n" as reviewQ_n
+participant ":VoteC" as voteC
+participant ":VoteC_n" as voteC_n
+
 participant "ModeratorController" as controller
 participant "reviewService:ReviewService" as service
 participant "reviewRepository:ReviewRepository" as repository
 participant "requestService:RequestService" as request
 participant ":AuthInstance" as instanceAuth
 
+
+participant ":MessageBroker" as broker
 activate client
 
-client -> controller: PUT /moderator/review/{idReview}
+client -> reviewC: PUT /moderator/review/{idReview}
+reviewC -> controller: PUT /moderator/review/{idReview}
 controller -> service : reviewService.changeStatus(idReview,resource)
 
 service -> request : parseJwt(request)
@@ -27,9 +44,21 @@ alt user.getRoles = "MODERATOR"
     service -> repository: reviewRepository.updateReview(resource,idReview)
     repository --> service: ok
 end
+service -> broker:publish "Review.update, {Review}"
+reviewC_n <- broker: notify "Review.update"
+reviewC_n --> reviewC_n: update(Review)
+reviewQ <- broker: notify "Review.update"
+reviewQ -> reviewQ: update(Review)
+reviewQ_n <- broker: notify "Review.update"
+reviewQ_n -> reviewQ_n: update(Review)
+voteC <- broker: notify "Review.update"
+voteC -> voteC: update(Review)
+voteC_n <- broker: notify "Review.update"
+voteC_n -> voteC_n: update(Review)
 
 
 service -> controller: review
-controller -> client: review
+controller -> reviewC: review
+reviewC -> client: review
 
 @enduml
