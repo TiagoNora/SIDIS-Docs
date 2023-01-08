@@ -40,6 +40,8 @@
 ### 1.12 - US12 (Obtain the aggregated rating of a product)
 ![US12](US12-SD.svg)
 
+### 1.13 - US13 (To vote in a review that doesn't exist yet)
+![US13](US13-SD.svg)
 
 ## 2 - Logic View
 

@@ -21,6 +21,7 @@ left to right direction
 (US10  - To approve/reject a pending review) as US10
 (US11  - To obtain all my reviews) as US11
 (US12  - To obtain the aggregated rating of a product) as US12
+(US13  - To vote in a review that doesn't exist yet) as US13
 
 'package 1'
 aCostumer --> US01
@@ -50,6 +51,8 @@ rCostumer --> US11
 'package 5'
 aCostumer --> US12
 rCostumer --> US12
+
+rCostumer --> US13
 
 
 
