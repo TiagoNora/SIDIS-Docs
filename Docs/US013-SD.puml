@@ -1,0 +1,59 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+title To vote in a review that doesn't exist yet
+
+autoactivate on
+autonumber
+
+actor "Client" as Client
+
+participant ":VoteC" as voteC
+participant ":VoteC_n" as voteC_n
+
+participant ":ReviewC_n" as reviewC_n
+participant "VoteController" as Ctrl
+participant "VoteService:VoteService" as service
+participant "VoteRepository:VoteRepository" as Repo
+
+
+participant "ReviewService:ReviewService" as serviceReview
+participant "ReviewRepository:ReviewRepository" as RepoReview
+
+participant ":Request" as request
+participant ":MessageBroker" as broker
+
+activate Client
+
+voteC_n -> broker: subscribe "Vote"
+reviewC_n -> broker: subscribe "VoteRev"
+
+Client -> Ctrl : POST/Vote/sku/{sku}
+Ctrl -> service : VoteService.createVote(resource,sku,request);
+service -> request: parseJwt(request)
+request --> service: jwt
+service -> request: makeRequestToAuthentication(jwt)
+request --> service: UserDetailsDTO
+service --> Ctrl: accepted
+Ctrl --> Client: accepted
+
+service -> broker: publish "VoteRev, {Review}"
+reviewC_n <- broker: notify "VoteRev, {Review}"
+reviewC_n -> serviceReview: ReviewService.createReview(Review)
+serviceReview -> RepoReview: save(Review)
+RepoReview --> serviceReview: ok
+serviceReview --> reviewC_n: ok
+
+
+reviewC_n -> broker: publish "Vote, {Vote}"
+voteC_n <- broker: notify "VoteRev, {Review}"
+voteC_n -> service: createVote(Vote)
+service -> Repo: save(Vote)
+Repo -->service: ok
+service --> voteC_n: ok
+
+
+
+
+
+@enduml
