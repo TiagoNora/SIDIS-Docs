@@ -1,0 +1,69 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+title Create Product
+autoactivate on
+autonumber
+
+actor "User" as User
+
+participant ":ProductC1" as productC
+participant ":ReviewC_n" as reviewC_n
+participant ":ReviewQ_n" as reviewQ_n
+participant ":ProductC_n" as productC_n
+participant ":ProductQ_n" as productQ_n
+
+participant "ReviewController" as Ctrl
+participant "reviewService:ReviewService" as Svc
+participant "productRepo:ProductRepository" as repository
+participant "requestService:RequestService" as request
+participant ":ProductInstance" as instance
+participant ":AuthInstance" as instanceAuth
+participant "Product:Product" as product
+participant "ProductRepo:ProductRepository" as Repo
+
+participant ":MessageBroker" as broker
+
+
+
+productC -> broker: subscribe "product"
+reviewC_n -> broker: subscribe "product"
+reviewQ_n -> broker: subscribe "product"
+productC_n -> broker: subscribe "product"
+productQ_n -> broker: subscribe "product"
+
+activate User
+User -> productC : POST/create
+productC -> Ctrl: POST/create
+
+
+Ctrl -> Svc : create(ProductDetailsDTO, request)
+
+Svc -> Svc: jwt = parseJwt(request)
+Svc -> request: makeRequestToAuthentication(jwt)
+request -> instanceAuth: GET /auth/search/{jwt}
+instanceAuth --> request: user
+request --> Svc: user
+Svc -> product** : create(reviewDTO,sku,user.getId())
+product --> Svc :  Product
+Svc -> Repo : productRepo.save(Product)
+Repo --> Svc : ok
+Svc -> broker: publish "product, {Product}"
+
+reviewC_n <- broker: notify "product, {Product}"
+reviewC_n --> reviewC_n: save(Product)
+
+reviewC_n <- broker: notify "product, {Product}"
+reviewC_n --> reviewC_n: save(Product)
+reviewQ_n <- broker: notify "product, {Product}"
+reviewQ_n --> reviewQ_n: save(Product)
+
+productQ_n <- broker: notify "product, {Product}"
+productQ_n --> productQ_n: save(Product)
+productC_n <- broker: notify "product, {Product}"
+productC_n --> productC_n: save(Product)
+
+Svc --> Ctrl : ok
+Ctrl --> productC : ok
+productC -> User: ok
+
+@enduml
